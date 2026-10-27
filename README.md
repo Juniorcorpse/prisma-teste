@@ -35,4 +35,11 @@ Para trocar o origin:
 git remote remove origin
 git remote add origin <url>
 ```
+
 Sendo `<url>` o diretório do seu repositório remoto.
+
+Primero push:
+```bash
+git push --set-upstream origin main
+```
+os próximos git push na branch main devem funcionar sem precisar repetir --set-upstream origin main.
