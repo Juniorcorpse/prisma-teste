@@ -43,3 +43,14 @@ Primero push:
 git push --set-upstream origin main
 ```
 os próximos git push na branch main devem funcionar sem precisar repetir --set-upstream origin main.
+
+
+## Migrations
+```bash
+npx prisma migrate dev
+```
+- Como eu já havia criando um modelo de exemplo recebi a insturção pra restar o primeiro push com:
+```bash
+npx prisma migrate reset
+```
+- Apos isso consegui criar a primeira migrate
