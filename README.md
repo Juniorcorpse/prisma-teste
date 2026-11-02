@@ -54,3 +54,17 @@ npx prisma migrate dev
 npx prisma migrate reset
 ```
 - Apos isso consegui criar a primeira migrate
+- Caso não crie o Prisma Client executaro o comando abaixo:
+```bash
+npx prisma generate --config .\prisma7.config.ts
+```
+- O `--config` é necessário porque o arquivo se chama prisma7.config.ts — o CLI procura prisma.config.ts por padrão. Pelo output do schema, o client será criado em src/generated/prisma.
+
+- Usar `watch`. mude no packge.json o scripts dev para;
+```bash
+tsx watch src/server.ts
+```
+- isntall tsx
+```bash
+npx i -D tsx
+```
