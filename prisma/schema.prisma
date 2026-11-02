@@ -7,13 +7,57 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id    Int    @id @default(autoincrement())
-  status Boolean @default(true)
-  name  String
-  email String @unique
-  senha String
+// schema.prisma
 
+model Tenant {
+  id        Int      @id @default(autoincrement())
+  status    Boolean  @default(true)
+  nome      String   // Ex: "Prefeitura Municipal X"
+  cnpj      String   @unique
+  
+  // Relações
+  usuarios  User[]
+  contratos Contract[]
+
+  deletedAt DateTime? // <- Suporte a Soft Delete na prefeitura (opcional, caso seja necessário)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("tenants")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  status    Boolean  @default(true)
+  nome      String
+  email     String   @unique
+  senha     String
+  
   // Amarra o usuário a um tenant
-  tenantId  String
+  tenantId  Int
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+
+  deletedAt DateTime? // <- Suporte a Soft Delete na prefeitura (opcional, caso seja necessário)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("users")
+}
+
+model Contract {
+  id        Int      @id @default(autoincrement())
+  status    Boolean  @default(true)
+  numero    String
+  objeto    String
+  valor     Float
+  
+  // Todo contrato pertence estritamente a um tenant
+  tenantId  Int
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+
+  deletedAt DateTime? // <- Suporte a Soft Delete na prefeitura (opcional, caso seja necessário)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("contracts")
 }
