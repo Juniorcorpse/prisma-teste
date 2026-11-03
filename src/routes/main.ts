@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createTenant, createUser, getAllTenants } from '../services/tenant';
+import { createTenant, getAllTenants, getTenantByName } from '../services/tenant';
 
 export const mainRouter = Router();
 
@@ -25,4 +25,12 @@ mainRouter.post('/tenant', async(req, res) => {
 mainRouter.post('/tenants', async(req, res) => {
     const tenants = await getAllTenants();
     res.status(201).json(tenants);
+});
+
+mainRouter.get('/tenant', async(req, res) => {
+    const tenant = await getTenantByName('John Doe');
+    if (!tenant) {
+        return res.status(401).json({ error: 'Tenant not found' });
+    }
+    res.json(tenant);
 });

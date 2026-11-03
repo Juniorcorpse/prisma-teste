@@ -23,3 +23,18 @@ export const getAllTenants = async () => {
         return false;
     }
 };
+
+export const getTenantByName = async (nome: string) => {
+    try {
+        return await prisma.tenant.findFirst({
+            where: {nome: nome},
+            select: {
+                id: true,
+                nome: true,                
+                status: true
+            }
+        });
+    } catch (error) {
+        return false;
+    }
+};
