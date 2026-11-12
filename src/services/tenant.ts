@@ -46,6 +46,6 @@ export const updateTenant = async () => {
     const updateData = await prisma.tenant.update({
         where: { id: 1 },
         data: { nome: 'editado'}
-    })a
+    })
     return updateData;
 }
