@@ -12,6 +12,9 @@ export const createTenant = async (data: Prisma.TenantCreateInput) => {
 export const getAllTenants = async () => {
     try {
         return await prisma.tenant.findMany({
+            orderBy: {
+                id: 'desc'
+            },
             //definir quais campos serão retornados com o select
             select: {
                 id: true,               
@@ -38,3 +41,11 @@ export const getTenantByName = async (nome: string) => {
         return false;
     }
 };
+
+export const updateTenant = async (id: number, status: boolean) => {
+    const updateData = await prisma.tenant.update({
+        where: { id: 1 },
+        data: { nome: 'editado'}
+    })
+    return updateData;
+}

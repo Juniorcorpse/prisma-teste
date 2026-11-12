@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createTenant, getAllTenants, getTenantByName } from '../services/tenant';
+import { createTenant, getAllTenants, getTenantByName, updateTenant } from '../services/tenant';
 
 export const mainRouter = Router();
 
@@ -22,7 +22,7 @@ mainRouter.post('/tenant', async(req, res) => {
     res.status(201).json(tenants) ;
 });
 
-mainRouter.post('/tenants', async(req, res) => {
+mainRouter.get('/tenants', async(req, res) => {
     const tenants = await getAllTenants();
     res.status(201).json(tenants);
 });
@@ -34,3 +34,8 @@ mainRouter.get('/tenant', async(req, res) => {
     }
     res.json(tenant);
 });
+
+mainRouter.put('/tenant', async(req, res) => {
+    const result = await updateTenant(Number(req.params.id), true);
+    res.json(result);
+})
