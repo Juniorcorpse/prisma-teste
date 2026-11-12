@@ -36,6 +36,6 @@ mainRouter.get('/tenant', async(req, res) => {
 });
 
 mainRouter.put('/tenant', async(req, res) => {
-    const result = await updateTenant(Number(req.params.id), true);
+    const result = await updateTenant();
     res.json(result);
 })

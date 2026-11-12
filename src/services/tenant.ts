@@ -42,10 +42,10 @@ export const getTenantByName = async (nome: string) => {
     }
 };
 
-export const updateTenant = async (id: number, status: boolean) => {
+export const updateTenant = async () => {
     const updateData = await prisma.tenant.update({
         where: { id: 1 },
         data: { nome: 'editado'}
-    })
+    })a
     return updateData;
 }
